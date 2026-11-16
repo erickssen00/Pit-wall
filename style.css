@@ -1,0 +1,707 @@
+/* ==========================================================================
+   PIT WALL: Folha de Estilos (Linha Diagonal Alinhada ao Zebrado)
+   ========================================================================== */
+
+/* 1. VARIÁVEIS E RESET */
+:root {
+    --black: #0b0b0f;       /* fundo da página */
+    --panel: #16161d;       /* fundo dos cartões */
+    --panel-hover: #1e1e28; /* linha da tabela com o mouse em cima */
+    --red: #e10600;         /* vermelho da F1 */
+    --red-dark: #b80500;    /* vermelho no hover */
+    --white: #f5f5f7;       /* texto principal */
+    --muted: #9a9aa8;       /* texto cinza, menos importante */
+    --line: #26262f;        /* cor das bordas */
+    --yellow: #f5c400;      /* aviso dos ingressos */
+
+    /* cores das equipes */
+    --ferrari: #dc0030;
+    --mclaren: #ff8000;
+    --mercedes: #27f4d2;
+    --audi: #b6babd;
+
+    --font: 'Titillium Web', 'Segoe UI', sans-serif;
+}
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 2. BASE: a página inteira */
+body {
+    font-family: var(--font);
+    background: var(--black);
+    color: var(--white);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* 3. BOTÕES */
+.btn,
+.btn-primary,
+.btn-outline,
+.filter-button,
+.submit-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .35rem;
+    padding: .8rem 1.6rem;
+    border: 2px solid transparent;
+    font-size: .85rem;
+    font-weight: 700;
+    font-family: var(--font);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    white-space: nowrap;
+    line-height: 1.4;
+    transition: background-color .2s, color .2s, transform .15s;
+}
+
+.btn-primary,
+.submit-button {
+    background: var(--red);
+    color: var(--white);
+}
+
+.btn-primary:hover,
+.submit-button:hover {
+    background: var(--red-dark);
+    transform: translateY(-1px);
+}
+
+.btn-outline,
+.filter-button {
+    background: transparent;
+    border-color: var(--white);
+    color: var(--white);
+}
+
+.btn-outline:hover,
+.filter-button:hover {
+    background: var(--white);
+    color: var(--black);
+}
+
+/* 4. TOPO: flex em 3 partes */
+.cabecalho,
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 48px;
+    border-bottom: 1px solid var(--line);
+    background: var(--black);
+}
+
+.logo {
+    font-size: 1.7rem;
+    font-weight: 900;
+    font-style: italic;
+    text-transform: uppercase;
+}
+
+.logo span {
+    color: var(--red);
+}
+
+.menu {
+    display: flex;
+    gap: 32px;
+}
+
+.menu a {
+    font-size: .8rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    transition: color .2s;
+}
+
+.menu a:hover {
+    color: var(--white);
+}
+
+/* 5. HERO COM FAIXA DIAGONAL ENCOSTANDO NO ZEBRADO */
+.hero {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    min-height: 520px;
+    padding: 64px 48px 40px;
+    background-color: var(--black);
+    overflow: hidden;
+}
+
+/* Camada da Foto à direita */
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60%;
+    height: 100%;
+    background: url("img/pilotos.jpg") center center / cover no-repeat;
+    clip-path: polygon(25% 0, 100% 0, 100% 100%, 5% 100%);
+    z-index: 1;
+}
+
+/* Faixa Vermelha Inclinada alinhada perfeitamente até a borda inferior */
+.hero::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60%;
+    height: 100%;
+    background: var(--red);
+    clip-path: polygon(20% 0, 25% 0, 5% 100%, 0% 100%);
+    z-index: 2;
+}
+
+.hero-texto,
+.hero-content {
+    position: relative;
+    max-width: 520px;
+    z-index: 3;
+}
+
+.texto-medio,
+.eyebrow {
+    margin-bottom: 1rem;
+    font-size: .8rem;
+    font-weight: 600;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--red);
+}
+
+.titulo,
+.hero h1 {
+    font-size: 5.5rem;
+    font-weight: 900;
+    font-style: italic;
+    line-height: 1;
+    text-transform: uppercase;
+    margin-bottom: 1.25rem;
+}
+
+.titulo span,
+.hero h1 span {
+    display: block;
+    color: var(--red);
+}
+
+.hero-descricao {
+    max-width: 480px;
+    margin-bottom: 2rem;
+    color: var(--muted);
+}
+
+.hero-botoes,
+.hero-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* Números da pista sobre a foto */
+.track-info {
+    position: relative;
+    display: flex;
+    z-index: 3;
+}
+
+.info {
+    padding: 0 1.5rem;
+    border-left: 1px solid rgba(255, 255, 255, .25);
+    text-align: center;
+}
+
+.info strong,
+.info dd strong {
+    display: block;
+    font-size: 2.4rem;
+    font-weight: 900;
+    font-style: italic;
+    line-height: 1.2;
+}
+
+.info span,
+.info dt {
+    font-size: .72rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+/* Zebra da pista (Kerb) */
+.kerb {
+    height: 12px;
+    background: repeating-linear-gradient(90deg,
+        var(--red) 0, var(--red) 40px,
+        var(--white) 40px, var(--white) 80px);
+}
+
+/* 6. LAYOUT BASE */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px 48px;
+}
+
+main section,
+section.section {
+    padding: 48px 0;
+}
+
+/* Títulos de seção */
+.titulo-secao,
+.section-title {
+    font-size: 2rem;
+    font-weight: 900;
+    font-style: italic;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+}
+
+.titulo-secao span,
+.section-title span {
+    margin-right: .4rem;
+    font-size: 1.8rem;
+    color: var(--red);
+}
+
+/* 7. CARDS DOS PILOTOS */
+.drivers {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+.team-ferrari  { --team: var(--ferrari); }
+.team-mclaren  { --team: var(--mclaren); }
+.team-mercedes { --team: var(--mercedes); }
+.team-audi     { --team: var(--audi); }
+
+.card-pilotos,
+.driver-card {
+    background: var(--panel);
+    border-top: 5px solid var(--team);
+    padding: 1.5rem;
+    transition: transform .2s;
+    position: relative;
+}
+
+.card-pilotos:hover,
+.driver-card:hover {
+    transform: translateY(-6px);
+}
+
+.numero-piloto,
+.car-number {
+    font-size: 5rem;
+    font-weight: 900;
+    font-style: italic;
+    line-height: 1.1;
+    color: var(--team);
+    opacity: .35;
+    display: block;
+}
+
+.card-pilotos h3,
+.driver-name {
+    font-size: 1.2rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    color: var(--white);
+}
+
+.card-pilotos h3 strong,
+.driver-name strong {
+    font-weight: 900;
+}
+
+.nome-time,
+.team-name {
+    font-size: .85rem;
+    color: var(--muted);
+}
+
+/* 8. FORMULÁRIOS & FILTROS */
+label {
+    display: block;
+    margin-bottom: .4rem;
+    font-size: .75rem;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="search"],
+input[type="url"],
+input[type="number"],
+input[type="date"],
+textarea,
+select {
+    width: 100%;
+    padding: .8rem 1rem;
+    border: 1px solid var(--line);
+    font-size: .95rem;
+    font-family: var(--font);
+    color: var(--white);
+    background: var(--black);
+    transition: border-color .25s, box-shadow .25s;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--red);
+    box-shadow: 0 0 0 3px rgba(225, 6, 0, .2);
+}
+
+input[type="file"],
+.file-input {
+    width: 100%;
+    padding: .75rem;
+    border: 1.5px dashed var(--line);
+    font-size: .9rem;
+    color: var(--muted);
+    cursor: pointer;
+    background: var(--black);
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+small {
+    display: block;
+    margin-top: .3rem;
+    font-size: .8rem;
+    color: var(--muted);
+}
+
+.filters {
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.filter-item {
+    flex: 1;
+    min-width: 180px;
+}
+
+.filters input,
+.filters select {
+    background: var(--panel);
+}
+
+/* 9. CLASSIFICAÇÃO & TABELA */
+.table-container,
+.table-wrap {
+    background: var(--panel);
+    overflow: hidden;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+caption {
+    display: none;
+}
+
+th, td {
+    padding: 14px 18px;
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--line);
+}
+
+th {
+    font-size: .75rem;
+    font-weight: 600;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--muted);
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+tbody tr:hover {
+    background: var(--panel-hover);
+}
+
+.pos {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: var(--white);
+    color: var(--black);
+    font-size: .85rem;
+    font-weight: 900;
+}
+
+.leader {
+    background: rgba(225, 6, 0, .12);
+}
+
+.leader .pos {
+    background: var(--red);
+    color: var(--white);
+}
+
+.bar {
+    display: inline-block;
+    width: 4px;
+    height: 18px;
+    margin-right: .6rem;
+    vertical-align: middle;
+    background: var(--team, var(--red));
+}
+
+.diferenca,
+.muted {
+    font-size: .85rem;
+    letter-spacing: .05em;
+    color: var(--muted);
+}
+
+.points,
+td strong {
+    font-weight: 900;
+}
+
+/* 10. INGRESSOS */
+.tickets {
+    display: grid;
+    grid-template-columns: 1fr 1.6fr;
+    gap: 3rem;
+    align-items: start;
+}
+
+.tickets-info p,
+.tickets-intro {
+    margin-bottom: 1rem;
+    color: var(--muted);
+}
+
+.aviso,
+.notice {
+    padding: .85rem 1rem;
+    border-left: 4px solid var(--yellow);
+    background: rgba(245, 196, 0, .12);
+    font-weight: 600;
+    color: var(--yellow);
+    margin-bottom: 1.5rem;
+}
+
+.tickets-info li,
+.prices li {
+    display: flex;
+    justify-content: space-between;
+    padding: .9rem 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.tickets-info li p,
+.prices li span {
+    margin: 0;
+    color: var(--white);
+}
+
+.text-ver,
+.prices li strong {
+    font-weight: 700;
+    color: var(--red);
+}
+
+.ticket-form {
+    background: var(--panel);
+    border-top: 4px solid var(--red);
+    padding: 2rem;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 1.25rem;
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.full,
+.form-group.full {
+    grid-column: 1 / -1;
+}
+
+.submit-button.full {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+/* 11. RODAPÉ */
+.rodape,
+.footer {
+    margin-top: 2rem;
+    padding: 2rem 1rem;
+    border-top: 1px solid var(--line);
+    text-align: center;
+    font-size: .8rem;
+    color: var(--muted);
+}
+
+.rodape span,
+.footer span {
+    color: var(--red);
+}
+
+/* 12. RESPONSIVIDADE (CELULAR E TABLET) */
+@media (max-width: 768px) {
+    .cabecalho,
+    .topbar {
+        padding: 14px 16px;
+    }
+
+    .logo {
+        font-size: 1.3rem;
+    }
+
+    .menu {
+        display: none;
+    }
+
+    .btn,
+    .btn-primary,
+    .btn-outline {
+        padding: .6rem 1rem;
+        font-size: .72rem;
+    }
+
+    .hero {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2rem;
+        min-height: 0;
+        padding: 32px 20px;
+    }
+
+    .hero::before {
+        width: 100%;
+        clip-path: none;
+        opacity: 0.35;
+    }
+
+    .hero::after {
+        display: none;
+    }
+
+    .titulo,
+    .hero h1 {
+        font-size: 3.2rem;
+    }
+
+    .info {
+        padding: 0 1rem;
+    }
+
+    .info strong,
+    .info dd strong {
+        font-size: 1.8rem;
+    }
+
+    .container {
+        padding: 16px 20px;
+    }
+
+    .titulo-secao,
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .drivers {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .card-pilotos,
+    .driver-card {
+        padding: 1rem;
+    }
+
+    .numero-piloto,
+    .car-number {
+        font-size: 3rem;
+    }
+
+    .filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-item {
+        min-width: 100%;
+    }
+
+    .table-container,
+    .table-wrap {
+        overflow-x: auto;
+    }
+
+    table {
+        min-width: 620px;
+    }
+
+    th, td {
+        padding: 12px;
+        white-space: nowrap;
+    }
+
+    .tickets {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .ticket-form {
+        padding: 1.25rem;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
